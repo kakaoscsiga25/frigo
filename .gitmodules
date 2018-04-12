@@ -1,0 +1,3 @@
+[submodule "3rdparty/realm-java"]
+	path = 3rdparty/realm-java
+	url = https://github.com/realm/realm-java.git
