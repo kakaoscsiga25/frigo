@@ -7,8 +7,18 @@ buildscript {
         jcenter()
     }
     dependencies {
+//        compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+//        compile 'com.google.zxing:core:3.2.1'
+//        compile files('libs/core-3.3.2.jar')
+
         classpath 'com.android.tools.build:gradle:3.1.1'
-        
+        classpath "io.realm:realm-gradle-plugin:5.0.0"
+
+//        compile files('/home/gergo/StudioProjects/frigo/libs/core-3.3.0.jar')
+
+//        classpath 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+//        classpath 'com.google.zxing:core:3.2.0'
+//        compile files('libs/core-3.3.2.jar')
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
