@@ -32,13 +32,13 @@ import java.io.IOException;
 //import java.util.
 
 import test.frigo.CameraPreview;
-import test.frigo.ScannerFragment;
+import android.app.Fragment;
 
 
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
 //import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -92,18 +92,25 @@ public class MainActivity extends AppCompatActivity {
 
 //        SurfaceView sv = new SurfaceView(this);
 
-//        Camera cam = Camera.open();
-//        if(cam != null)
-//            Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
-//
-//        mPreview = new CameraPreview(this, cam);
+        Camera cam = Camera.open();
+        if(cam != null)
+            Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        mPreview = new CameraPreview(this, cam);
 
-        Fragment fraggy = new ScannerFragment();
-        fragmentTransaction.add(findViewById(R.id.fl), fraggy);
-        fragmentTransaction.commit();
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camView);
+        preview.addView(mPreview);
+
+
+//        SurfaceView mview = new SurfaceView(getBaseContext());
+//        cam.setPreviewDisplay(mview.getHolder());
+
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+//        Fragment fragment = new ScannerFragment();
+//        fragmentTransaction.add(findViewById(R.id.fl), fraggy);
+//        fragmentTransaction.commit();
 
 //        FrameLayout fl = (FrameLayout)findViewById(R.id.fl);
 //        f = new ScannerFragment();
@@ -118,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
 //        fl.addView(new IntentIntegrator(fl));
 
 
-//        new IntentIntegrator(this).initiateScan(); // `this` is the current Activity
+//        new IntentIntegrator(fragment).initiateScan(); // `this` is the current Activity
 //        new IntentIntegrator(this).setCaptureActivity(CameraPreview.class).initiateScan();
-//        IntentIntegrator integrator = new IntentIntegrator(fl.);
+//        IntentIntegrator integrator = new IntentIntegrator(fraggy);
 
-//        Intent intent = new Intent(this, ContinuousCaptureActivity.class);
+//        Intent intent = new Intent(fraggy, ContinuousCaptureActivity.class);
 //        startActivity(intent);
 
 //        SurfaceView sv = (SurfaceView)findViewById(R.id.camView);
