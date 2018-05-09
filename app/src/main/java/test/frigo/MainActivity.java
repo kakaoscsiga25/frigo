@@ -2,6 +2,7 @@ package test.frigo;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,16 +56,24 @@ import com.google.zxing.integration.android.IntentResult;
 
 
 public class MainActivity extends AppCompatActivity {
-//    public class Dog extends RealmObject {
+    private static String LOG_TAG = "MainA";
+    //    public class Dog extends RealmObject {
 //        public String name;
 //        public int age;
 //    }
     Button button ;
     Intent intent ;
-    private ImageView imageView;
+//    private ImageView imageView;
     private final int requestCode = 20;
+//    private CameraPreview mPreview;
+//    Fragment f;
+//    Camera cam = null;
+
+    private Camera mCamera;
     private CameraPreview mPreview;
-    Fragment f;
+
+//    private byte[] previewBuffer;
+
 
 
     @Override
@@ -92,116 +101,31 @@ public class MainActivity extends AppCompatActivity {
 
 //        SurfaceView sv = new SurfaceView(this);
 
-        Camera cam = Camera.open();
-        if(cam != null)
-            Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
+        // Create an instance of Camera
+        mCamera = CameraPreview.getCameraInstance();
 
-        mPreview = new CameraPreview(this, cam);
 
+
+
+
+        // print saved parameters
+//        int prevWidth = mCamera.getParameters().getPreviewSize().width;
+//        int prevHeight = mCamera.getParameters().getPreviewSize().height;
+//        int picWidth = mCamera.getParameters().getPictureSize().width;
+//        int picHeight = mCamera.getParameters().getPictureSize().height;
+//
+//        Log.d(MainActivity.LOG_TAG, "setupCamera(): settings applied:\n\t"
+//                + "preview size: " + prevWidth + "x" + prevHeight + "\n\t"
+//                + "picture size: " + picWidth + "x" + picHeight
+//        );
+
+
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camView);
         preview.addView(mPreview);
 
-
-//        SurfaceView mview = new SurfaceView(getBaseContext());
-//        cam.setPreviewDisplay(mview.getHolder());
-
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-//        Fragment fragment = new ScannerFragment();
-//        fragmentTransaction.add(findViewById(R.id.fl), fraggy);
-//        fragmentTransaction.commit();
-
-//        FrameLayout fl = (FrameLayout)findViewById(R.id.fl);
-//        f = new ScannerFragment();
-//
-//        FrameLayout preview = (FrameLayout) findViewById(R.id.camView);
-//        preview.addView(mPreview);
-//
-//        ScannerFragment sf = new ScannerFragment();
-//        EditText et = new EditText(this);
-//        fl.addView(et,100,100);
-
-//        fl.addView(new IntentIntegrator(fl));
-
-
-//        new IntentIntegrator(fragment).initiateScan(); // `this` is the current Activity
-//        new IntentIntegrator(this).setCaptureActivity(CameraPreview.class).initiateScan();
-//        IntentIntegrator integrator = new IntentIntegrator(fraggy);
-
-//        Intent intent = new Intent(fraggy, ContinuousCaptureActivity.class);
-//        startActivity(intent);
-
-//        SurfaceView sv = (SurfaceView)findViewById(R.id.camView);
-//        sv.draw();
-//        imageView.
-//        SurfaceView mview = new SurfaceView(getBaseContext());
-//        cam.setPreviewDisplay(mview.getHolder());
-
-//        cam.setPreviewCallback(previewCallback);
-
-//        try {
-//            cam.setPreviewDisplay(sv.getHolder());
-//            Toast.makeText(this, "Cam ok", Toast.LENGTH_LONG).show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(this, "Cam FAIL", Toast.LENGTH_LONG).show();
-//        }
-//        cam.startPreview();
-
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-//        cam.startPreview();
-
-//        cam.startPreview();
-
-//        SurfaceTexture surfaceTexture = new SurfaceTexture(10);
-//        cam.setPreviewTexture(surfaceTexture);
-
-
-//        button = (Button)findViewById(R.id.button);
-//        imageView = (ImageView)this.findViewById(R.id.camView);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//                startActivityForResult(intent, requestCode);
-//
-//            }
-//        });
-
-//        Button photoButton = (Button) this.findViewById(R.id.button1);
-//        photoButton.setOnClickListener(new View.OnClickListener() {
-
-//            @Override
-//            public void onClick(View v) {
-//                if (checkSelfPermission(Manifest.permission.CAMERA)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-//                            MY_CAMERA_PERMISSION_CODE);
-//                } else {
-//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-//                }
-//            }
-//        });
     }
-
-//    Camera.PreviewCallback previewCallback = new Camera.PreviewCallback(){
-//        public void onPreviewFrame(byte[] b, Camera c) {
-//            setContentView(R.layout.activity_main);
-//            ImageView iv = (ImageView)findViewById(R.id.iv);
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
-//            iv.setImageBitmap(bitmap);
-//            Toast.makeText(this, "callback", Toast.LENGTH_SHORT).show();
-//        }
-//    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
