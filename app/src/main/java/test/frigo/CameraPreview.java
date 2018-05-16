@@ -11,14 +11,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.FormatException;
 import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
-import com.google.zxing.Reader;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.oned.MultiFormatOneDReader;
@@ -28,11 +25,37 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
+
+
 /** A basic Camera preview class */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
     Context mContext;
+/*
+    private BarcodeCallback callback = new BarcodeCallback() {
+        @Override
+        public void barcodeResult(BarcodeResult result) {
+            if(result.getText() == null || result.getText().equals(lastText)) {
+                // Prevent duplicate scans
+                return;
+            }
+
+            lastText = result.getText();
+            barcodeView.setStatusText(result.getText());
+
+            beepManager.playBeepSoundAndVibrate();
+
+            //Added preview of scanned barcode
+            ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
+            imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
+        }
+
+        @Override
+        public void possibleResultPoints(List<ResultPoint> resultPoints) {
+        }
+    };
+*/
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
@@ -145,6 +168,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         Log.d(TAG, "************ TEST *************");
         try {
             Result result = reader.decode(bitmap);
+            
             Toast.makeText(mContext, result.getText(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, result.getText());
         } catch (NotFoundException e) {
@@ -155,5 +179,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
 
     }
+
 }
 

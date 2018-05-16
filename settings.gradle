@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':zxing-android-embedded'
+//project(':zxing-android-embedded').projectDir = new File('3rdparty/zxing-android-embedded')

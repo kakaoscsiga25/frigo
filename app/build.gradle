@@ -31,8 +31,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //    implementation files('/home/gergo/StudioProjects/frigo/libs/core-3.3.2.jar')
-    implementation files('/home/gergo/StudioProjects/frigo/libs/android-core-3.3.0.jar')
-    implementation files('/home/gergo/StudioProjects/frigo/libs/android-integration-3.3.0.jar')
-    implementation files('/home/gergo/StudioProjects/frigo/libs/core-3.3.0.jar')
-    implementation files('/home/gergo/StudioProjects/frigo/libs/zxingorg-3.3.0-sources.jar')
+    implementation files('../libs/android-core-3.3.0.jar')
+    implementation files('../libs/android-integration-3.3.0.jar')
+    implementation files('../libs/core-3.3.0.jar')
+    implementation files('../libs/zxingorg-3.3.0-sources.jar')
+    implementation 'com.android.support:design:27.1.1'
 }
